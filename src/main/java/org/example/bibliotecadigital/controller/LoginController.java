@@ -46,8 +46,16 @@ public class LoginController{
 
     @FXML
     public void handleRegistro(){
-        // TODO: ventana de registro
-        lblError.setText("Funcionalidad en desarrollo");
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecadigital/view/registro.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) txtUsername.getScene().getWindow();
+            stage.setScene(new Scene(root, 380, 580));
+            stage.setTitle("Biblioteca Digital - Registro");
+        }catch(IOException e){
+            e.printStackTrace();
+            lblError.setText("Error al cargar la ventana de registro");
+        }
     }
 
     private void abrirDashboard(String username){
