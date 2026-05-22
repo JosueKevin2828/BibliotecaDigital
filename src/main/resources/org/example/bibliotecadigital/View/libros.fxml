@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.bibliotecadigital.controller.LibrosController"
+            style="-fx-background-color: #ecf0f1;">
+
+    <top>
+        <VBox spacing="10" style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+            <Label text="Gestion de Libros"
+                   style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <Button text="← Volver al Dashboard" onAction="#handleVolver"
+                    style="-fx-background-color: #7f8c8d; -fx-text-fill: white;"/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="15" style="-fx-padding: 20;">
+            <HBox spacing="10">
+                <TextField fx:id="txtTitulo" promptText="Titulo" HBox.hgrow="ALWAYS"/>
+                <TextField fx:id="txtAutor" promptText="Autor" HBox.hgrow="ALWAYS"/>
+                <TextField fx:id="txtCategoria" promptText="Categoria" HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <HBox spacing="10">
+                <TextField fx:id="txtIsbn" promptText="ISBN" HBox.hgrow="ALWAYS"/>
+                <TextField fx:id="txtCantidad" promptText="Cantidad" HBox.hgrow="ALWAYS"/>
+                <Button text="Agregar" onAction="#handleAgregar"
+                        style="-fx-background-color: #2ecc71; -fx-text-fill: white;"/>
+                <Button text="Actualizar" onAction="#handleActualizar"
+                        style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+                <Button text="Eliminar" onAction="#handleEliminar"
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+            </HBox>
+
+            <HBox spacing="10">
+                <TextField fx:id="txtBuscar" promptText="Buscar por titulo..." HBox.hgrow="ALWAYS"/>
+                <Button text="Buscar" onAction="#handleBuscar"
+                        style="-fx-background-color: #f39c12; -fx-text-fill: white;"/>
+                <Button text="Mostrar Todos" onAction="#handleMostrarTodos"
+                        style="-fx-background-color: #9b59b6; -fx-text-fill: white;"/>
+            </HBox>
+
+            <TableView fx:id="tablaLibros" prefHeight="400">
+                <columns>
+                    <TableColumn text="ID" fx:id="colId" prefWidth="50"/>
+                    <TableColumn text="Titulo" fx:id="colTitulo" prefWidth="200"/>
+                    <TableColumn text="Autor" fx:id="colAutor" prefWidth="150"/>
+                    <TableColumn text="Categoria" fx:id="colCategoria" prefWidth="100"/>
+                    <TableColumn text="ISBN" fx:id="colIsbn" prefWidth="120"/>
+                    <TableColumn text="Disponible" fx:id="colCantidad" prefWidth="80"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+</BorderPane>
