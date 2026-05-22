@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx/17"
+<VBox stylesheets="@../css/styles.css" alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="org.example.bibliotecadigital.controller.LoginController"
       style="-fx-background-color: #5D4037;">
