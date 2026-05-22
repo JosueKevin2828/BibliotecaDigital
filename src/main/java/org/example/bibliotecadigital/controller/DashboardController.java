@@ -36,11 +36,17 @@ public class DashboardController{
     private void cargarEstadisticas(){
         long totalLibros = libroDAO.count();
         long totalUsuarios = usuarioDAO.count();
-        long totalPrestamos = prestamoDAO.count();
+        long prestamosActivos = 0;
+
+        try{
+            prestamosActivos = prestamoDAO.count();
+        }catch(Exception e){
+            prestamosActivos = 0;
+        }
 
         lblTotalLibros.setText(String.valueOf(totalLibros));
         lblTotalUsuarios.setText(String.valueOf(totalUsuarios));
-        lblPrestamosActivos.setText(String.valueOf(totalPrestamos));
+        lblPrestamosActivos.setText(String.valueOf(prestamosActivos));
     }
 
     @FXML
