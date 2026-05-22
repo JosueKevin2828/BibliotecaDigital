@@ -1,21 +1,26 @@
 package org.example.bibliotecadigital;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class MainApp extends Application{
 
     @Override
     public void start(Stage primaryStage){
-        Label label = new Label("Sistema de Biblioteca Digital");
-        StackPane root = new StackPane(label);
-        Scene scene = new Scene(root, 500, 400);
-        primaryStage.setTitle("Biblioteca Digital");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecadigital/view/login.fxml"));
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root, 400, 450);
+            primaryStage.setTitle("Biblioteca Digital - Login");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args){
