@@ -55,19 +55,16 @@ public class DashboardController{
 
     @FXML
     public void handleUsuarios(){
-        // TODO: vista de usuarios
-        System.out.println("Usuarios - En desarrollo");
+        cambiarVista("/org/example/bibliotecadigital/view/usuarios.fxml");
     }
 
     @FXML
     public void handlePrestamos(){
-        // TODO: vista de prestamos
-        System.out.println("Prestamos - En desarrollo");
+        cambiarVista("/org/example/bibliotecadigital/view/prestamos.fxml");
     }
 
     @FXML
     public void handleReportes(){
-        // TODO: vista de reportes
         System.out.println("Reportes - En desarrollo");
     }
 
