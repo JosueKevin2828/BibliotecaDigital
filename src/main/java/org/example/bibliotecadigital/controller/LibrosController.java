@@ -7,6 +7,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.example.bibliotecadigital.util.ExportadorCSV;
+import org.example.bibliotecadigital.util.ExportadorJSON;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -188,4 +191,29 @@ public class LibrosController{
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+
+    @FXML
+    public void handleExportarCSV(){
+        try{
+            String nombreArchivo = "libros_exportados_" + System.currentTimeMillis() + ".csv";
+            ExportadorCSV.exportarLibros(listaLibros, nombreArchivo);
+            mostrarAlerta("Exito", "Exportado a CSV: " + nombreArchivo);
+        }catch(Exception e){
+            e.printStackTrace();
+            mostrarAlerta("Error", "No se pudo exportar: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void handleExportarJSON(){
+        try{
+            String nombreArchivo = "libros_exportados_" + System.currentTimeMillis() + ".json";
+            ExportadorJSON.exportarLibros(listaLibros, nombreArchivo);
+            mostrarAlerta("Exito", "Exportado a JSON: " + nombreArchivo);
+        }catch(Exception e){
+            e.printStackTrace();
+            mostrarAlerta("Error", "No se pudo exportar: " + e.getMessage());
+        }
+    }
+
 }
