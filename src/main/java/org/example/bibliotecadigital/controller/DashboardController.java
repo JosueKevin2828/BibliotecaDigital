@@ -64,11 +64,6 @@ public class DashboardController{
     }
 
     @FXML
-    public void handleReportes(){
-        System.out.println("Reportes - En desarrollo");
-    }
-
-    @FXML
     public void handleLogout(){
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecadigital/view/login.fxml"));
