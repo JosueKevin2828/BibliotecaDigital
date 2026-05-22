@@ -5,8 +5,12 @@ import org.example.bibliotecadigital.model.Usuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -58,7 +62,8 @@ public class UsuariosController{
 
     private void cargarTodosLosUsuarios(){
         List<Usuario> usuarios = usuarioDAO.findAll();
-        listaUsuarios.setAll(usuarios);
+        listaUsuarios.clear();
+        listaUsuarios.addAll(usuarios);
     }
 
     private void cargarUsuarioEnFormulario(Usuario u){
@@ -147,10 +152,10 @@ public class UsuariosController{
             cargarTodosLosUsuarios();
         }else{
             Optional<Usuario> u = usuarioDAO.buscarPorEmail(busqueda);
+            listaUsuarios.clear();
             if(u.isPresent()){
-                listaUsuarios.setAll(u.get());
+                listaUsuarios.add(u.get());
             }else{
-                listaUsuarios.clear();
                 mostrarAlerta("Info", "No encontrado");
             }
         }
@@ -165,11 +170,13 @@ public class UsuariosController{
     @FXML
     public void handleVolver(){
         try{
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/org/example/bibliotecadigital/view/dashboard.fxml"));
-            javafx.scene.Parent root = loader.load();
-            javafx.stage.Stage stage = (javafx.stage.Stage) txtNombre.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecadigital/view/dashboard.fxml"));
+            Parent root = loader.load();
+            DashboardController controller = loader.getController();
+            controller.cargarEstadisticas();
+            Stage stage = (Stage) txtNombre.getScene().getWindow();
             stage.getScene().setRoot(root);
-        }catch(java.io.IOException e){
+        }catch(Exception e){
             e.printStackTrace();
         }
     }

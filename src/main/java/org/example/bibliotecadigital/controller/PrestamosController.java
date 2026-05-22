@@ -1,8 +1,5 @@
 package org.example.bibliotecadigital.controller;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.stage.Stage;
 import org.example.bibliotecadigital.dao.LibroDAO;
 import org.example.bibliotecadigital.dao.PrestamoDAO;
 import org.example.bibliotecadigital.dao.UsuarioDAO;
@@ -15,10 +12,12 @@ import org.example.bibliotecadigital.observer.PrestamoObserver;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import java.io.IOException;
+import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -102,7 +101,8 @@ public class PrestamosController{
 
     private void cargarTodosLosPrestamos(){
         List<Prestamo> prestamos = prestamoDAO.findAll();
-        listaPrestamos.setAll(prestamos);
+        listaPrestamos.clear();
+        listaPrestamos.addAll(prestamos);
     }
 
     private void verificarPrestamosVencidos(){
@@ -195,9 +195,11 @@ public class PrestamosController{
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecadigital/view/dashboard.fxml"));
             Parent root = loader.load();
+            DashboardController controller = loader.getController();
+            controller.cargarEstadisticas();
             Stage stage = (Stage) cbLibro.getScene().getWindow();
             stage.getScene().setRoot(root);
-        }catch(IOException e){
+        }catch(Exception e){
             e.printStackTrace();
         }
     }

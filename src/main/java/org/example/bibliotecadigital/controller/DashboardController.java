@@ -33,20 +33,14 @@ public class DashboardController{
         cargarEstadisticas();
     }
 
-    private void cargarEstadisticas(){
+    public void cargarEstadisticas(){
         long totalLibros = libroDAO.count();
         long totalUsuarios = usuarioDAO.count();
-        long prestamosActivos = 0;
-
-        try{
-            prestamosActivos = prestamoDAO.count();
-        }catch(Exception e){
-            prestamosActivos = 0;
-        }
+        long totalPrestamos = prestamoDAO.count();
 
         lblTotalLibros.setText(String.valueOf(totalLibros));
         lblTotalUsuarios.setText(String.valueOf(totalUsuarios));
-        lblPrestamosActivos.setText(String.valueOf(prestamosActivos));
+        lblPrestamosActivos.setText(String.valueOf(totalPrestamos));
     }
 
     @FXML
@@ -84,7 +78,8 @@ public class DashboardController{
 
     private void cambiarVista(String fxml){
         try{
-            Parent root = FXMLLoader.load(getClass().getResource(fxml));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+            Parent root = loader.load();
             Stage stage = (Stage) lblUsuario.getScene().getWindow();
             stage.getScene().setRoot(root);
         }catch(IOException e){

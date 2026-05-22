@@ -5,8 +5,12 @@ import org.example.bibliotecadigital.model.Libro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import org.example.bibliotecadigital.util.ExportadorCSV;
 import org.example.bibliotecadigital.util.ExportadorJSON;
 
@@ -176,25 +180,6 @@ public class LibrosController{
     }
 
     @FXML
-    public void handleVolver(){
-        try{
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/org/example/bibliotecadigital/view/dashboard.fxml"));
-            javafx.scene.Parent root = loader.load();
-            javafx.stage.Stage stage = (javafx.stage.Stage) txtTitulo.getScene().getWindow();
-            stage.getScene().setRoot(root);
-        }catch(java.io.IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    private void mostrarAlerta(String titulo, String mensaje){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
-
-    @FXML
     public void handleExportarCSV(){
         try{
             String nombreArchivo = "libros_exportados_" + System.currentTimeMillis() + ".csv";
@@ -216,5 +201,26 @@ public class LibrosController{
             e.printStackTrace();
             mostrarAlerta("Error", "No se pudo exportar: " + e.getMessage());
         }
+    }
+
+    @FXML
+    public void handleVolver(){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecadigital/view/dashboard.fxml"));
+            Parent root = loader.load();
+            DashboardController controller = loader.getController();
+            controller.cargarEstadisticas();
+            Stage stage = (Stage) txtTitulo.getScene().getWindow();
+            stage.getScene().setRoot(root);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }
