@@ -7,34 +7,38 @@
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.example.bibliotecadigital.controller.PrestamosController"
-            style="-fx-background-color: #ecf0f1;">
+            style="-fx-background-color: #F5F0E6;">
 
     <top>
-        <VBox spacing="10" style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+        <VBox spacing="10" style="-fx-background-color: #5D4037; -fx-padding: 15;">
             <Label text="Gestion de Prestamos"
-                   style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                   style="-fx-text-fill: #FFE0B2; -fx-font-size: 18px; -fx-font-weight: bold;"/>
             <Button text="← Volver al Dashboard" onAction="#handleVolver"
-                    style="-fx-background-color: #7f8c8d; -fx-text-fill: white;"/>
+                    style="-fx-background-color: #8D6E63; -fx-text-fill: white;"/>
         </VBox>
     </top>
 
     <center>
         <VBox spacing="15" style="-fx-padding: 20;">
             <HBox spacing="10">
-                <ComboBox fx:id="cbLibro" promptText="Libro" HBox.hgrow="ALWAYS"/>
-                <ComboBox fx:id="cbUsuario" promptText="Usuario" HBox.hgrow="ALWAYS"/>
+                <ComboBox fx:id="cbLibro" promptText="Libro" HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: white; -fx-border-color: #D7CCC8; -fx-border-radius: 5;"/>
+                <ComboBox fx:id="cbUsuario" promptText="Usuario" HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: white; -fx-border-color: #D7CCC8; -fx-border-radius: 5;"/>
             </HBox>
 
             <HBox spacing="10">
-                <DatePicker fx:id="dpFechaPrestamo" promptText="Fecha Prestamo" HBox.hgrow="ALWAYS"/>
-                <DatePicker fx:id="dpFechaDevolucion" promptText="Fecha Devolucion" HBox.hgrow="ALWAYS"/>
+                <DatePicker fx:id="dpFechaPrestamo" promptText="Fecha Prestamo" HBox.hgrow="ALWAYS"
+                            style="-fx-background-color: white; -fx-border-color: #D7CCC8; -fx-border-radius: 5;"/>
+                <DatePicker fx:id="dpFechaDevolucion" promptText="Fecha Devolucion" HBox.hgrow="ALWAYS"
+                            style="-fx-background-color: white; -fx-border-color: #D7CCC8; -fx-border-radius: 5;"/>
                 <Button text="Registrar Prestamo" onAction="#handleRegistrarPrestamo"
-                        style="-fx-background-color: #2ecc71; -fx-text-fill: white;"/>
+                        style="-fx-background-color: #8D6E63; -fx-text-fill: white; -fx-border-radius: 5;"/>
                 <Button text="Registrar Devolucion" onAction="#handleRegistrarDevolucion"
-                        style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+                        style="-fx-background-color: #A1887F; -fx-text-fill: white; -fx-border-radius: 5;"/>
             </HBox>
 
-            <TableView fx:id="tablaPrestamos" prefHeight="400">
+            <TableView fx:id="tablaPrestamos" prefHeight="400" style="-fx-background-color: #EFEBE9;">
                 <columns>
                     <TableColumn text="ID" fx:id="colId" prefWidth="50"/>
                     <TableColumn text="ID Libro" fx:id="colIdLibro" prefWidth="80"/>

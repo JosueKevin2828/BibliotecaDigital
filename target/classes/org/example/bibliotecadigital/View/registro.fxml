@@ -7,43 +7,43 @@
 <VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="org.example.bibliotecadigital.controller.RegistroController"
-      style="-fx-background-color: #2c3e50;">
+      style="-fx-background-color: #5D4037;">
 
     <padding>
         <Insets top="30" right="30" bottom="30" left="30"/>
     </padding>
 
-    <Label text="Crear Cuenta Nueva" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <Label text="Crear Cuenta Nueva" style="-fx-text-fill: #FFE0B2; -fx-font-size: 20px; -fx-font-weight: bold;"/>
 
     <TextField fx:id="txtNombre" promptText="Nombre completo*" maxWidth="300"
-               style="-fx-background-radius: 5; -fx-padding: 8;"/>
+               style="-fx-background-radius: 5; -fx-padding: 8; -fx-background-color: #EFEBE9;"/>
 
     <TextField fx:id="txtEmail" promptText="Email*" maxWidth="300"
-               style="-fx-background-radius: 5; -fx-padding: 8;"/>
+               style="-fx-background-radius: 5; -fx-padding: 8; -fx-background-color: #EFEBE9;"/>
 
     <TextField fx:id="txtTelefono" promptText="Telefono" maxWidth="300"
-               style="-fx-background-radius: 5; -fx-padding: 8;"/>
+               style="-fx-background-radius: 5; -fx-padding: 8; -fx-background-color: #EFEBE9;"/>
 
     <TextField fx:id="txtDireccion" promptText="Direccion" maxWidth="300"
-               style="-fx-background-radius: 5; -fx-padding: 8;"/>
+               style="-fx-background-radius: 5; -fx-padding: 8; -fx-background-color: #EFEBE9;"/>
 
     <ComboBox fx:id="cbTipo" promptText="Tipo de usuario" maxWidth="300"
-              style="-fx-background-radius: 5; -fx-padding: 8;"/>
+              style="-fx-background-radius: 5; -fx-padding: 8; -fx-background-color: #EFEBE9;"/>
 
     <TextField fx:id="txtUsername" promptText="Usuario*" maxWidth="300"
-               style="-fx-background-radius: 5; -fx-padding: 8;"/>
+               style="-fx-background-radius: 5; -fx-padding: 8; -fx-background-color: #EFEBE9;"/>
 
     <PasswordField fx:id="txtPassword" promptText="Contrasena* (min 4 caracteres)" maxWidth="300"
-                   style="-fx-background-radius: 5; -fx-padding: 8;"/>
+                   style="-fx-background-radius: 5; -fx-padding: 8; -fx-background-color: #EFEBE9;"/>
 
     <PasswordField fx:id="txtConfirmPassword" promptText="Confirmar contrasena*" maxWidth="300"
-                   style="-fx-background-radius: 5; -fx-padding: 8;"/>
+                   style="-fx-background-radius: 5; -fx-padding: 8; -fx-background-color: #EFEBE9;"/>
 
     <Button text="Registrarse" onAction="#handleRegistrar" maxWidth="300"
-            style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 10;"/>
+            style="-fx-background-color: #8D6E63; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 10;"/>
 
     <Button text="Volver al Login" onAction="#handleVolver" maxWidth="300"
-            style="-fx-background-color: #7f8c8d; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 8;"/>
+            style="-fx-background-color: #6D4C41; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 8;"/>
 
-    <Label fx:id="lblError" text="" style="-fx-text-fill: #e74c3c;" wrapText="true" maxWidth="300"/>
+    <Label fx:id="lblError" text="" style="-fx-text-fill: #EF9A9A;" wrapText="true" maxWidth="300"/>
 </VBox>

@@ -7,28 +7,28 @@
 <VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx/17"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="org.example.bibliotecadigital.controller.LoginController"
-      style="-fx-background-color: #2c3e50;">
+      style="-fx-background-color: #5D4037;">
 
     <padding>
         <Insets top="40" right="40" bottom="40" left="40"/>
     </padding>
 
-    <Label text="Biblioteca Digital" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+    <Label text="Biblioteca Digital" style="-fx-text-fill: #FFE0B2; -fx-font-size: 24px; -fx-font-weight: bold;"/>
 
-    <Label text="Iniciar Sesion" style="-fx-text-fill: #ecf0f1; -fx-font-size: 18px;"/>
+    <Label text="Iniciar Sesion" style="-fx-text-fill: #D7CCC8; -fx-font-size: 18px;"/>
 
     <TextField fx:id="txtUsername" promptText="Usuario" maxWidth="300"
-               style="-fx-background-radius: 5; -fx-padding: 10;"/>
+               style="-fx-background-radius: 5; -fx-padding: 10; -fx-background-color: #EFEBE9;"/>
 
     <PasswordField fx:id="txtPassword" promptText="Contrasena" maxWidth="300"
-                   style="-fx-background-radius: 5; -fx-padding: 10;"/>
+                   style="-fx-background-radius: 5; -fx-padding: 10; -fx-background-color: #EFEBE9;"/>
 
     <Button text="Ingresar" onAction="#handleLogin" maxWidth="300"
-            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 10;"/>
+            style="-fx-background-color: #8D6E63; -fx-text-fill: white; -fx-background-radius: 5; -fx-padding: 10;"/>
 
-    <Label fx:id="lblError" text="" style="-fx-text-fill: #e74c3c;" wrapText="true" maxWidth="300"/>
+    <Label fx:id="lblError" text="" style="-fx-text-fill: #EF9A9A;" wrapText="true" maxWidth="300"/>
 
     <Hyperlink text="Crear cuenta nueva" onAction="#handleRegistro"
-               style="-fx-text-fill: #bdc3c7;"/>
+               style="-fx-text-fill: #D7CCC8;"/>
 
 </VBox>
