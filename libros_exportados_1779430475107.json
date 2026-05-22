@@ -1,0 +1,10 @@
+[
+  {
+    "id": 3,
+    "titulo": "El Quijote",
+    "autor": "Miguel de Cervantes",
+    "categoria": "Novela",
+    "isbn": "978-84-376-0494-7",
+    "cantidadDisponible": 5
+  }
+]

@@ -47,8 +47,6 @@
                         style="-fx-background-color: #1abc9c; -fx-text-fill: white;"/>
                 <Button text="Exportar JSON" onAction="#handleExportarJSON"
                         style="-fx-background-color: #e67e22; -fx-text-fill: white;"/>
-                <Button text="TEST" onAction="#testAgregarLibroPrueba"
-                        style="-fx-background-color: #f1c40f; -fx-text-fill: black;"/>
             </HBox>
 
             <TableView fx:id="tablaLibros" prefHeight="400">
