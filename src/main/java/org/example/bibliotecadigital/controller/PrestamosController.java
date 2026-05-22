@@ -1,5 +1,8 @@
 package org.example.bibliotecadigital.controller;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
 import org.example.bibliotecadigital.dao.LibroDAO;
 import org.example.bibliotecadigital.dao.PrestamoDAO;
 import org.example.bibliotecadigital.dao.UsuarioDAO;
@@ -7,11 +10,15 @@ import org.example.bibliotecadigital.factory.PrestamoFactory;
 import org.example.bibliotecadigital.model.Libro;
 import org.example.bibliotecadigital.model.Prestamo;
 import org.example.bibliotecadigital.model.Usuario;
+import org.example.bibliotecadigital.observer.NotificadorMultas;
+import org.example.bibliotecadigital.observer.PrestamoObserver;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -35,12 +42,17 @@ public class PrestamosController{
     private UsuarioDAO usuarioDAO;
     private PrestamoDAO prestamoDAO;
     private ObservableList<Prestamo> listaPrestamos;
+    private NotificadorMultas notificador;
+    private PrestamoObserver observer;
 
     public PrestamosController(){
         libroDAO = new LibroDAO();
         usuarioDAO = new UsuarioDAO();
         prestamoDAO = new PrestamoDAO();
         listaPrestamos = FXCollections.observableArrayList();
+        notificador = new NotificadorMultas();
+        observer = new PrestamoObserver();
+        notificador.agregarObservador(observer);
     }
 
     @FXML
@@ -61,6 +73,7 @@ public class PrestamosController{
 
         tablaPrestamos.setItems(listaPrestamos);
         cargarTodosLosPrestamos();
+        verificarPrestamosVencidos();
     }
 
     private void cargarLibros(){
@@ -92,6 +105,28 @@ public class PrestamosController{
         listaPrestamos.setAll(prestamos);
     }
 
+    private void verificarPrestamosVencidos(){
+        List<Prestamo> prestamos = prestamoDAO.findAll();
+        boolean hayVencidos = false;
+
+        for(Prestamo p : prestamos){
+            if(p.getEstado().equals("ACTIVO") && LocalDate.now().isAfter(p.getFechaDevolucionEsperada())){
+                hayVencidos = true;
+                Optional<Usuario> usuario = usuarioDAO.findById(p.getIdUsuario());
+                Optional<Libro> libro = libroDAO.findById(p.getIdLibro());
+                long dias = java.time.temporal.ChronoUnit.DAYS.between(p.getFechaDevolucionEsperada(), LocalDate.now());
+
+                if(usuario.isPresent() && libro.isPresent()){
+                    notificador.notificarPrestamoRetrasado(usuario.get().getNombre(), libro.get().getTitulo(), (int)dias);
+                }
+            }
+        }
+
+        if(hayVencidos){
+            notificador.verificarPrestamoVencido();
+        }
+    }
+
     @FXML
     public void handleRegistrarPrestamo(){
         Libro libro = cbLibro.getValue();
@@ -116,6 +151,7 @@ public class PrestamosController{
         cargarLibros();
         cargarTodosLosPrestamos();
         mostrarAlerta("Exito", "Prestamo registrado");
+        verificarPrestamosVencidos();
     }
 
     @FXML
@@ -137,6 +173,7 @@ public class PrestamosController{
         if(LocalDate.now().isAfter(selected.getFechaDevolucionEsperada())){
             long dias = java.time.temporal.ChronoUnit.DAYS.between(selected.getFechaDevolucionEsperada(), LocalDate.now());
             selected.setMulta(dias * 5);
+            mostrarAlerta("Multa", "Multa aplicada: $" + (dias * 5));
         }
 
         prestamoDAO.update(selected);
@@ -149,17 +186,18 @@ public class PrestamosController{
 
         cargarLibros();
         cargarTodosLosPrestamos();
-        mostrarAlerta("Exito", "Devolucion registrada. Multa: $" + selected.getMulta());
+        mostrarAlerta("Exito", "Devolucion registrada");
+        verificarPrestamosVencidos();
     }
 
     @FXML
     public void handleVolver(){
         try{
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/org/example/bibliotecadigital/view/dashboard.fxml"));
-            javafx.scene.Parent root = loader.load();
-            javafx.stage.Stage stage = (javafx.stage.Stage) cbLibro.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecadigital/view/dashboard.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) cbLibro.getScene().getWindow();
             stage.getScene().setRoot(root);
-        }catch(java.io.IOException e){
+        }catch(IOException e){
             e.printStackTrace();
         }
     }

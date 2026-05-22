@@ -33,4 +33,9 @@ public class NotificadorMultas implements Sujeto{
         this.mensaje = "ATENCION: Hay prestamos vencidos. Revise la lista de prestamos.";
         notificarObservadores(mensaje);
     }
+
+    public void notificarPrestamoRetrasado(String nombreUsuario, String tituloLibro, int diasRetraso){
+        this.mensaje = "ATENCION: El usuario " + nombreUsuario + " tiene retraso de " + diasRetraso + " dias con el libro: " + tituloLibro;
+        notificarObservadores(mensaje);
+    }
 }
