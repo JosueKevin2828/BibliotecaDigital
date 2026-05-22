@@ -40,6 +40,7 @@ public class LibrosController{
 
     @FXML
     public void initialize(){
+        // Configurar columnas - usar los nombres exactos de los getters
         colId.setCellValueFactory(new PropertyValueFactory<>("idLibro"));
         colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         colAutor.setCellValueFactory(new PropertyValueFactory<>("autor"));
@@ -47,20 +48,28 @@ public class LibrosController{
         colIsbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
         colCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidadDisponible"));
 
+        // Forzar que la tabla se actualice
         tablaLibros.setItems(listaLibros);
+        tablaLibros.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+        // Listener para seleccion
         tablaLibros.getSelectionModel().selectedItemProperty().addListener((obs, old, selected) -> {
             if(selected != null){
                 cargarLibroEnFormulario(selected);
             }
         });
 
+        // Cargar libros
         cargarTodosLosLibros();
     }
 
     private void cargarTodosLosLibros(){
         List<Libro> libros = libroDAO.findAll();
-        listaLibros.setAll(libros);
+        System.out.println("DEBUG: Libros encontrados: " + libros.size());
+        listaLibros.clear();
+        listaLibros.addAll(libros);
+        tablaLibros.refresh();
+        System.out.println("DEBUG: Tabla actualizada con " + listaLibros.size() + " libros");
     }
 
     private void cargarLibroEnFormulario(Libro libro){
@@ -163,7 +172,9 @@ public class LibrosController{
             cargarTodosLosLibros();
         }else{
             List<Libro> libros = libroDAO.buscarPorTitulo(busqueda);
-            listaLibros.setAll(libros);
+            listaLibros.clear();
+            listaLibros.addAll(libros);
+            tablaLibros.refresh();
         }
     }
 
@@ -216,4 +227,19 @@ public class LibrosController{
         }
     }
 
+    @FXML
+    public void testAgregarLibroPrueba(){
+        Libro libro = new Libro();
+        libro.setIdLibro(999);
+        libro.setTitulo("LIBRO DE PRUEBA VISUAL");
+        libro.setAutor("AUTOR PRUEBA");
+        libro.setCategoria("TEST");
+        libro.setIsbn("123456");
+        libro.setCantidadDisponible(1);
+        libro.setFechaRegistro(LocalDate.now());
+
+        listaLibros.add(libro);
+        tablaLibros.refresh();
+        System.out.println("DEBUG: Libro prueba agregado, total: " + listaLibros.size());
+    }
 }

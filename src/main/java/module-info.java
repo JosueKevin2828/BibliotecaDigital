@@ -5,6 +5,8 @@ module org.example.bibliotecadigital{
 
     opens org.example.bibliotecadigital to javafx.fxml;
     opens org.example.bibliotecadigital.controller to javafx.fxml;
+    opens org.example.bibliotecadigital.model to javafx.base;
     exports org.example.bibliotecadigital;
     exports org.example.bibliotecadigital.controller;
+    exports org.example.bibliotecadigital.model;
 }
