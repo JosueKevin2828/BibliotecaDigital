@@ -9,8 +9,10 @@ public class ExportadorCSV{
 
     public static void exportarLibros(List<Libro> libros, String rutaArchivo) throws IOException{
         try(FileWriter writer = new FileWriter(rutaArchivo)){
+            // Escribe cabecera
             writer.write("ID,Titulo,Autor,Categoria,ISBN,Cantidad Disponible\n");
 
+            // Escribe cada libro
             for(Libro libro : libros){
                 writer.write(libro.getIdLibro() + ",");
                 writer.write(escaparCSV(libro.getTitulo()) + ",");

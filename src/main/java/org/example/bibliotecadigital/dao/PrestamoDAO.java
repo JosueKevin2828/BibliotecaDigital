@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+// Implementacion para Prestamo, Patron Programacion Generica
 public class PrestamoDAO implements GenericDAO<Prestamo, Integer>{
 
     private Connection conexion;
 
+    // 1. Obtener conexion
     public PrestamoDAO(){
         this.conexion = ConexionBD.getInstance().getConnection();
     }

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 public class PrestamoFactory{
 
+    // Crea un prestamo con valores por defecto
     public static Prestamo crearPrestamo(int idLibro, int idUsuario){
         Prestamo prestamo = new Prestamo();
         prestamo.setIdLibro(idLibro);
@@ -17,15 +18,6 @@ public class PrestamoFactory{
         return prestamo;
     }
 
-    public static Prestamo crearPrestamoConRenovacion(Prestamo prestamoOriginal){
-        Prestamo nuevoPrestamo = new Prestamo();
-        nuevoPrestamo.setIdLibro(prestamoOriginal.getIdLibro());
-        nuevoPrestamo.setIdUsuario(prestamoOriginal.getIdUsuario());
-        nuevoPrestamo.setFechaPrestamo(LocalDate.now());
-        nuevoPrestamo.setFechaDevolucionEsperada(LocalDate.now().plusDays(7));
-        nuevoPrestamo.setFechaDevolucionReal(null);
-        nuevoPrestamo.setEstado("ACTIVO");
-        nuevoPrestamo.setMulta(0.0);
-        return nuevoPrestamo;
-    }
+    // Aqui se irian agregando mas metodos para creacion de objetos en casos futuros, como Renovacion(no implemente)
+
 }

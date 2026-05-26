@@ -7,10 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+//
+
+// Implementacion para Libro, Patron Programacion Generica
 public class LibroDAO implements GenericDAO<Libro, Integer>{
 
     private Connection conexion;
 
+    // FLUJO DE UNA CONSULTA A BD:
+    // 1. Obtener conexion
     public LibroDAO(){
         this.conexion = ConexionBD.getInstance().getConnection();
     }
@@ -59,6 +64,8 @@ public class LibroDAO implements GenericDAO<Libro, Integer>{
         }
         return Optional.empty();
     }
+
+    //
 
     @Override
     public List<Libro> findAll(){
@@ -138,13 +145,16 @@ public class LibroDAO implements GenericDAO<Libro, Integer>{
         return 0;
     }
 
+    // 2. Preparar consulta (con ? para parametros)
     // Metodo extra para buscar por titulo
     public List<Libro> buscarPorTitulo(String titulo){
         List<Libro> libros = new ArrayList<>();
         String sql = "SELECT * FROM libros WHERE titulo LIKE ?";
         try(PreparedStatement ps = conexion.prepareStatement(sql)){
             ps.setString(1, "%" + titulo + "%");
+            // 3. Ejecutar consulta
             ResultSet rs = ps.executeQuery();
+            // 4. Procesar resultados
             while(rs.next()){
                 Libro libro = new Libro();
                 libro.setIdLibro(rs.getInt("id_libro"));

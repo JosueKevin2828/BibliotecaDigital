@@ -39,7 +39,9 @@ public class UsuarioLoginDAO{
 
     // Registrar nuevo usuario login
     public boolean registrar(String username, String password, int idUsuario){
+        // 2. Inserta en BD
         String sql = "INSERT INTO usuarios_login(username, password_hash, id_usuario) VALUES(?, ?, ?)";
+        // 1. Encripta contraseña
         String hash = PasswordUtil.encriptarSHA1(password);
 
         try(PreparedStatement ps = conexion.prepareStatement(sql)){

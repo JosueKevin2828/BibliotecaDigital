@@ -11,6 +11,7 @@ public class PrestamoObserver implements Observador{
     }
 
     private void mostrarAlerta(String mensaje){
+        // Muestra una alerta en pantalla
         Alert alert = new Alert(AlertType.WARNING);
         alert.setTitle("Notificacion de Prestamos");
         alert.setHeaderText(null);

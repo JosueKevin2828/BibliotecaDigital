@@ -7,8 +7,11 @@ public class PasswordUtil{
 
     public static String encriptarSHA1(String password){
         try{
+            // Obtener instancia del algoritmo SHA-1
             MessageDigest md = MessageDigest.getInstance("SHA-1");
+            // Convierte contraseña a bytes y encripta
             byte[] bytes = md.digest(password.getBytes());
+            // Convierte bytes a hexadecimal
             StringBuilder sb = new StringBuilder();
             for(byte b : bytes){
                 sb.append(String.format("%02x", b));

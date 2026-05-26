@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+// Implementacion para Usuario, Patron Programacion Generica
 public class UsuarioDAO implements GenericDAO<Usuario, Integer>{
 
     private Connection conexion;
 
+    // 1. Obtener conexion
     public UsuarioDAO(){
         this.conexion = ConexionBD.getInstance().getConnection();
     }

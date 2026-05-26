@@ -11,9 +11,11 @@ public class MainApp extends Application{
     @Override
     public void start(Stage primaryStage){
         try{
+            //carga el archivo FXML de login
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecadigital/view/login.fxml"));
             Parent root = loader.load();
 
+            //crea la ventana
             Scene scene = new Scene(root, 400, 450);
             primaryStage.setTitle("Biblioteca Digital - Login");
             primaryStage.setScene(scene);
@@ -24,6 +26,6 @@ public class MainApp extends Application{
     }
 
     public static void main(String[] args){
-        launch(args);
+        launch(args); //inicia javaFX
     }
 }

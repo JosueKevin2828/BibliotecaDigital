@@ -142,6 +142,8 @@ public class PrestamosController{
             return;
         }
 
+        // Usamos la fabrica
+        // Prestamo prestamo = PrestamoFactory.crearPrestamo(idLibro, idUsuario);
         Prestamo prestamo = PrestamoFactory.crearPrestamo(libro.getIdLibro(), usuario.getIdUsuario());
         prestamoDAO.save(prestamo);
 
@@ -154,6 +156,9 @@ public class PrestamosController{
         verificarPrestamosVencidos();
     }
 
+    //CALCULO DE LAS MULTAS
+
+    // Al registrar devolucion
     @FXML
     public void handleRegistrarDevolucion(){
         Prestamo selected = tablaPrestamos.getSelectionModel().getSelectedItem();
@@ -170,9 +175,10 @@ public class PrestamosController{
         selected.setFechaDevolucionReal(LocalDate.now());
         selected.setEstado("DEVUELTO");
 
+        // Calcula dias de retraso
         if(LocalDate.now().isAfter(selected.getFechaDevolucionEsperada())){
             long dias = java.time.temporal.ChronoUnit.DAYS.between(selected.getFechaDevolucionEsperada(), LocalDate.now());
-            selected.setMulta(dias * 5);
+            selected.setMulta(dias * 5); // $5 por día
             mostrarAlerta("Multa", "Multa aplicada: $" + (dias * 5));
         }
 

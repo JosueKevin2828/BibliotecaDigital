@@ -3,12 +3,14 @@ package org.example.bibliotecadigital.dao;
 import java.util.List;
 import java.util.Optional;
 
-public interface GenericDAO<T, ID>{
-    T save(T entity);
-    Optional<T> findById(ID id);
-    List<T> findAll();
-    T update(T entity);
-    void delete(ID id);
+
+// Interfaz generica,  T es el tipo de entidad, ID es el tipo del identificador
+public interface GenericDAO<T,  ID>{
+    T save(T entity); //guarda
+    Optional<T> findById(ID id); //busca por id
+    List<T> findAll(); //lista todos
+    T update(T entity); // actualiza
+    void delete(ID id); // elimina
     boolean existsById(ID id);
-    long count();
+    long count(); //cuenta total
 }
